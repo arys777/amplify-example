@@ -1,0 +1,33 @@
+type Event 
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["ManageEvents"] },
+    ]
+  )
+{
+  id: ID!
+  ems_id: String!
+  name: String!
+  api_key: String
+  sessions: [Session] @connection
+}
+
+type Session 
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["ManageEvents"] },
+    ]
+  )
+{
+  id: ID!
+  ems_id: String!
+  title: String!
+  abstract: String!
+  category: String
+  event: Event @connection
+  level: String
+  product: String
+  type: String!
+}
